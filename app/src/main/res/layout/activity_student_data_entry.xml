@@ -1,0 +1,141 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_layout_create_account_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical"
+    tools:context=".StudentDataEntry">
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/Content_Register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="8"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+                <EditText
+                    android:id="@+id/et_fullName"
+                    style="@style/EditText"
+                    android:inputType="text"
+                    android:hint="@string/full_name_hint"
+                    android:layout_weight="1"
+                    />
+
+                <EditText
+                    android:id="@+id/et_schoolName"
+                    style="@style/EditText"
+                    android:inputType="text"
+                    android:hint="@string/school_name_hint"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+
+
+            <EditText
+                android:id="@+id/text_id"
+                style="@style/EditText"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email_hint"
+                android:layout_weight="1"
+                />
+            <EditText
+                android:id="@+id/mobileNumber"
+                style="@style/EditText"
+                android:inputType="number"
+                android:hint="@string/mobile_number"
+                android:layout_weight="1"
+                android:maxLength="10"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:text="Roll Number"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/tv_roll_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="Select Gender"
+                android:textStyle="bold"
+                />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/genderSelection"
+                >
+                <RadioButton android:id="@+id/radio_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_others"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="other"
+                    android:onClick="onRadioButtonClicked"/>
+
+            </RadioGroup>
+
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:onClick= "onRegisterPressed"
+                android:text= "Register"
+                android:textColor="@android:color/white"
+                android:padding="@dimen/button_padding"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

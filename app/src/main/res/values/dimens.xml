@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">10dp</dimen>
+    <dimen name="image_padding">14dp</dimen>
+    <dimen name="text_padding">14dp</dimen>
+    <dimen name="linear_layout_margin">15dp</dimen>
+    <dimen name="image_view_width">134dp</dimen>
+    <dimen name="image_view_height">134dp</dimen>
+    <dimen name="button_padding">14dp</dimen>
+</resources>
+
