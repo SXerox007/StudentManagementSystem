@@ -2,7 +2,6 @@ package com.example.sumit_thakur.studentmanagementsystem;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,16 +11,17 @@ import android.widget.Toast;
 import com.example.sumit_thakur.studentmanagementsystem.Model.StudentInformation;
 
 /**
- * student data entry class
+ * Add student data entry class
  */
-public class StudentDataEntry extends AppCompatActivity {
-    private static final int RESULT_CODE = 22;
+public class StudentDataEntry extends BaseActivity {
+    private static final int RESULT_CODE = 22, R_CODE = 90;
     private static Integer rollNumber;
     private EditText fullName, schoolName, emailId, contactNumber;
     private Button register;
     private RadioButton male, female, other;
-    private String checkGender;
+    private String checkGender, datacheck;
     private StudentInformation infoStudent;
+    private int pos;
 
     /**
      * @param savedInstanceState oncreate
@@ -31,24 +31,52 @@ public class StudentDataEntry extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_data_entry);
         init();
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                genderSelect();
-                int flag;
-                flag = onRegisterPressed();
-                if (flag == 1) {
-                    Toast.makeText(getBaseContext(), "Register Sucessfully", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent();
-                    intent.putExtra("StudentInformation", infoStudent);
-                    setResult(RESULT_CODE, intent);
-                    finish();
-                }
+        if (infoStudent != null) {
+            setData();
+            Intent intent = getIntent();
+            String data = intent.getStringExtra("key");
+            if (data.equals(datacheck)) {
+                fullName.setEnabled(false);
+                schoolName.setEnabled(false);
+                emailId.setEnabled(false);
+                contactNumber.setEnabled(false);
+            } else {
+                register.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+                        genderSelect();
+                        int flag;
+                        flag = onRegisterPressed();
+                        if (flag == 1) {
+                            Intent intent = getIntent();
+                            //code to do
 
+
+                            finish();
+                        }
+                    }
+                });
             }
-        });
+        } else {
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    genderSelect();
+                    int flag;
+                    flag = onRegisterPressed();
+                    if (flag == 1) {
+                        Toast.makeText(getBaseContext(), "Register Sucessfully", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        intent.putExtra("StudentInformation", infoStudent);
+                        setResult(RESULT_CODE, intent);
+                        finish();
+                    }
 
+                }
+            });
+        }
     }
+
 
     /**
      * @return integer value which satisfy the condition
@@ -90,8 +118,7 @@ public class StudentDataEntry extends AppCompatActivity {
         infoStudent.setFullName(fName);
         infoStudent.setSchoolName(nameSchool);
         infoStudent.setGenderSelect(checkGender);
-        infoStudent.setRollNumber(Integer.toString(rollNumber));
-        rollNumber++;
+        infoStudent.setRollNumber(Integer.toString(rollNumber++));
     }
 
 
@@ -109,8 +136,11 @@ public class StudentDataEntry extends AppCompatActivity {
         female = (RadioButton) findViewById(R.id.radio_female);
         other = (RadioButton) findViewById(R.id.radio_others);
         rollNumber = 1;
-
+        infoStudent = getIntent().getParcelableExtra("object");
+        pos = getIntent().getIntExtra("pos", 0);
+        datacheck = "view";
     }
+
 
     /**
      * gender Select
@@ -142,5 +172,15 @@ public class StudentDataEntry extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-
+    /**
+     * set the data in different different fields
+     */
+    private void setData() {
+        fullName.setText(infoStudent.getFullName());
+        schoolName.setText(infoStudent.getSchoolName());
+        emailId.setText(infoStudent.getEmailId());
+        contactNumber.setText(infoStudent.getContactNumber());
+        register.setText("Save");
+        register.setVisibility(View.GONE);
+    }
 }

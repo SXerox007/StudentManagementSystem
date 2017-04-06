@@ -2,13 +2,15 @@ package com.example.sumit_thakur.studentmanagementsystem;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -16,17 +18,20 @@ import com.example.sumit_thakur.studentmanagementsystem.Adapters.RecyclerViewAda
 import com.example.sumit_thakur.studentmanagementsystem.Model.StudentInformation;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Details of Student
  */
-public class DetaisStudent extends AppCompatActivity {
+public class DetaisStudent extends BaseActivity {
     private static final int REQUEST_CODE = 2, RESULT_CODE = 22;
     private Button addStudent;
     private StudentInformation studentInfo;
     private ArrayList<StudentInformation> userInfos;
     private RecyclerView recyclerView;
     private Switch changeView;
+    private Spinner spinner;
 
     /**
      * @param savedInstanceState onCreate Activity start
@@ -36,7 +41,7 @@ public class DetaisStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detais_student);
         init();
-
+        spinnerFunctionality();
         addStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -54,6 +59,7 @@ public class DetaisStudent extends AppCompatActivity {
         studentInfo = new StudentInformation();
         userInfos = new ArrayList<>();
         changeView = (Switch) findViewById(R.id.sw_change);
+        spinner = (Spinner) findViewById(R.id.sp_user_sort);
     }
 
 
@@ -68,7 +74,7 @@ public class DetaisStudent extends AppCompatActivity {
             layoutSelection();
             recyclerView.setHasFixedSize(true);
         } else {
-            Toast.makeText(getBaseContext(), "result code Not Valid", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Sucessfully changed", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -88,8 +94,63 @@ public class DetaisStudent extends AppCompatActivity {
             }
 
         });
+    }
 
+
+    /**
+     *
+     */
+    public void spinnerFunctionality() {
+        final String text = "Sort By Id";
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.options_to_sort_student, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
+                String dataSortVariable = parent.getItemAtPosition(position).toString();
+                if (dataSortVariable.equals(text)) {
+                    sortNames();
+                } else {
+                    sortIDs();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(final AdapterView<?> parent) {
+
+            }
+
+        });
 
     }
+
+    /**
+     * sort the data in names-vise
+     */
+    private void sortNames() {
+        Collections.sort(userInfos, new Comparator<StudentInformation>() {
+            @Override
+            public int compare(final StudentInformation o1, final StudentInformation o2) {
+                return (o1.getFullName()).compareToIgnoreCase(o2.getFullName());
+            }
+        });
+    }
+
+    /**
+     * sort the data in contact number vise
+     */
+    private void sortIDs() {
+        Collections.sort(userInfos, new Comparator<StudentInformation>() {
+            @Override
+            public int compare(final StudentInformation o1, final StudentInformation o2) {
+                return (o1.getContactNumber()).compareTo(o2.getContactNumber());
+            }
+        });
+    }
+
 
 }

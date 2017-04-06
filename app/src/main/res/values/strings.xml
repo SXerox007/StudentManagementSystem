@@ -9,4 +9,9 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="gender_select">Gender</string>
     <string name="roll_no_hint">Roll NUmber</string>
+    <string name="dialog_fire_missiles">select option</string>
+    <string name="view_dialog">view</string>
+    <string name="edit_dialog">Edit</string>
+    <string name="delete_dialog">Delete</string>
+    <string name="view">view</string>
 </resources>
