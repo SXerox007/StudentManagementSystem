@@ -80,7 +80,6 @@ public class DetaisStudent extends BaseActivity {
             Toast.makeText(getBaseContext(), "Sucessfully changed", Toast.LENGTH_LONG).show();
         }
     }
-
     /**
      * layout selection grid or linear
      */
