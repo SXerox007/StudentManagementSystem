@@ -39,7 +39,7 @@
                     android:id="@+id/et_schoolName"
                     style="@style/EditText"
                     android:inputType="text"
-                    android:hint="@string/school_name_hint"
+                    android:hint="University Name"
                     android:layout_weight="1"
                     />
 
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
-                android:text="Select Gender"
+                android:text="Select Any One Course of the following:"
                 android:textStyle="bold"
                 />
 
@@ -103,21 +103,27 @@
                 android:orientation="vertical"
                 android:id="@+id/genderSelection"
                 >
-                <RadioButton android:id="@+id/radio_male"
+                <RadioButton android:id="@+id/radio_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male"
+                    android:text="Java"
                     android:onClick="onRadioButtonClicked"/>
-                <RadioButton android:id="@+id/radio_female"
+                <RadioButton android:id="@+id/radio_b"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"
+                    android:text="Python"
                     android:onClick="onRadioButtonClicked"/>
-                <RadioButton android:id="@+id/radio_others"
+                <RadioButton android:id="@+id/radio_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="other"
+                    android:text="C++"
                     android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Swift"
+                    android:onClick="onRadioButtonClicked"/>
+
 
             </RadioGroup>
 

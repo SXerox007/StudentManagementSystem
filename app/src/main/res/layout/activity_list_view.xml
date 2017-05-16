@@ -3,136 +3,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-        android:id="@+id/linear_layout_create_account_activity"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical"
-        >
-        <ScrollView
+        android:orientation="vertical">
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+        <LinearLayout style="@style/displayLinearLayout">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
+            <TextView
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="@string/full_name_hint" />
 
-                <LinearLayout
-                    style="@style/displayLinearLayout"
-                    >
-                    <TextView
-                        style="@style/TextView"
-                        android:text="@string/full_name_hint"
-                        android:layout_weight="1"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_fullName"
-                        style="@style/TextView"
-                        android:layout_weight="1"
-                        android:text=""
-                        />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/tv_fullName"
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
 
 
+        <LinearLayout style="@style/displayLinearLayout">
 
-                <LinearLayout
-                    style="@style/displayLinearLayout"
-                    >
-                    <TextView
-                        style="@style/TextView"
-                        android:text="@string/school_name_hint"
-                        android:layout_weight="1"
-                        />
+            <TextView
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="@string/school_name_hint" />
 
-                    <TextView
-                        android:id="@+id/tv_school_name"
-                        style="@style/TextView"
-                        android:layout_weight="1"
-                        android:text=""
-                        />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/tv_school_name"
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
 
 
-                <LinearLayout
-                    style="@style/displayLinearLayout"
-                    >
-                    <TextView
-                        style="@style/TextView"
-                        android:text="@string/email_hint"
-                        android:layout_weight="1"
-                        />
+        <LinearLayout style="@style/displayLinearLayout">
 
-                    <TextView
-                        android:id="@+id/emaiId"
-                        style="@style/TextView"
-                        android:layout_weight="1"
-                        android:text=""
-                        />
-                </LinearLayout>
+            <TextView
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="@string/email_hint" />
 
-                <LinearLayout
-                    style="@style/displayLinearLayout"
-                    >
-                    <TextView
-                        style="@style/TextView"
-                        android:text="@string/gender_select"
-                        android:layout_weight="1"
-                        />
+            <TextView
+                android:id="@+id/emaiId"
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/gender"
-                        style="@style/TextView"
-                        android:layout_weight="1"
-                        android:text=""
-                        />
-                </LinearLayout>
+        <LinearLayout style="@style/displayLinearLayout">
 
-                <LinearLayout
-                    style="@style/displayLinearLayout"
-                    >
-                    <TextView
-                        style="@style/TextView"
-                        android:text="@string/mobile_number"
-                        android:layout_weight="1"
-                        />
+            <TextView
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="Course Select" />
 
-                    <TextView
-                        android:id="@+id/mobileNumber"
-                        style="@style/TextView"
-                        android:layout_weight="1"
-                        android:text=""
-                        />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/gender"
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
 
-                <LinearLayout
-                    style="@style/displayLinearLayout"
-                    >
-                    <TextView
-                        style="@style/TextView"
-                        android:text="@string/roll_no_hint"
-                        android:layout_weight="1"
-                        />
+        <LinearLayout style="@style/displayLinearLayout">
 
-                    <TextView
-                        android:id="@+id/tv_roll_no"
-                        style="@style/TextView"
-                        android:layout_weight="1"
-                        android:text=""
-                        />
-                </LinearLayout>
+            <TextView
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="@string/mobile_number" />
 
-            </LinearLayout>
-        </ScrollView>
+            <TextView
+                android:id="@+id/mobileNumber"
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/displayLinearLayout">
+
+            <TextView
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="University ID" />
+
+            <TextView
+                android:id="@+id/tv_roll_no"
+                style="@style/TextView"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
 
     </LinearLayout>
-
-
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sumit_thakur.studentmanagementsystem.Model.StudentInformation;
@@ -14,14 +15,12 @@ import com.example.sumit_thakur.studentmanagementsystem.Model.StudentInformation
  * Add student data entry class
  */
 public class StudentDataEntry extends BaseActivity {
-    private static final int RESULT_CODE = 22, R_CODE = 90;
-    private static Integer rollNumber;
-    private EditText fullName, schoolName, emailId, contactNumber;
-    private Button register;
-    private RadioButton male, female, other;
-    private String checkGender, datacheck;
+    private EditText etFullName, etSchoolName, etEmailId, etContactNumber;
+    private Button btnRegister;
+    private TextView tvRollNumber;
+    private RadioButton rba, rbb, rbc, rbd;
+    private String checkGender, datacheck, data, rollNumber;
     private StudentInformation infoStudent;
-    private int pos;
 
     /**
      * @param savedInstanceState oncreate
@@ -34,14 +33,15 @@ public class StudentDataEntry extends BaseActivity {
         if (infoStudent != null) {
             setData();
             Intent intent = getIntent();
-            String data = intent.getStringExtra("key");
+            data = intent.getStringExtra("key");
             if (data.equals(datacheck)) {
-                fullName.setEnabled(false);
-                schoolName.setEnabled(false);
-                emailId.setEnabled(false);
-                contactNumber.setEnabled(false);
+                etFullName.setEnabled(false);
+                etSchoolName.setEnabled(false);
+                etEmailId.setEnabled(false);
+                etContactNumber.setEnabled(false);
+                btnRegister.setVisibility(View.GONE);
             } else {
-                register.setOnClickListener(new View.OnClickListener() {
+                btnRegister.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(final View v) {
                         genderSelect();
@@ -58,7 +58,7 @@ public class StudentDataEntry extends BaseActivity {
                 });
             }
         } else {
-            register.setOnClickListener(new View.OnClickListener() {
+            btnRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     genderSelect();
@@ -68,7 +68,7 @@ public class StudentDataEntry extends BaseActivity {
                         Toast.makeText(getBaseContext(), "Register Sucessfully", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
                         intent.putExtra("StudentInformation", infoStudent);
-                        setResult(RESULT_CODE, intent);
+                        setResult(RESULT_OK, intent);
                         finish();
                     }
 
@@ -82,10 +82,10 @@ public class StudentDataEntry extends BaseActivity {
      * @return integer value which satisfy the condition
      */
     public int onRegisterPressed() {
-        String userEmail = emailId.getText().toString();
-        String fName = fullName.getText().toString();
-        String mobNumber = contactNumber.getText().toString();
-        String nameSchool = schoolName.getText().toString();
+        String userEmail = etEmailId.getText().toString();
+        String fName = etFullName.getText().toString();
+        String mobNumber = etContactNumber.getText().toString();
+        String nameSchool = etSchoolName.getText().toString();
 
         if (userEmail.isEmpty() || nameSchool.isEmpty() || fName.isEmpty()
                 || checkGender.isEmpty() || mobNumber.isEmpty()) {
@@ -118,7 +118,6 @@ public class StudentDataEntry extends BaseActivity {
         infoStudent.setFullName(fName);
         infoStudent.setSchoolName(nameSchool);
         infoStudent.setGenderSelect(checkGender);
-        infoStudent.setRollNumber(Integer.toString(rollNumber++));
     }
 
 
@@ -126,19 +125,20 @@ public class StudentDataEntry extends BaseActivity {
      * initialization
      */
     public void init() {
-        fullName = (EditText) findViewById(R.id.et_fullName);
-        schoolName = (EditText) findViewById(R.id.et_schoolName);
-        emailId = (EditText) findViewById(R.id.text_id);
-        contactNumber = (EditText) findViewById(R.id.mobileNumber);
-        register = (Button) findViewById(R.id.btn_register);
+        tvRollNumber = (TextView) findViewById(R.id.tv_roll_no);
+        etFullName = (EditText) findViewById(R.id.et_fullName);
+        etSchoolName = (EditText) findViewById(R.id.et_schoolName);
+        etEmailId = (EditText) findViewById(R.id.text_id);
+        etContactNumber = (EditText) findViewById(R.id.mobileNumber);
+        btnRegister = (Button) findViewById(R.id.btn_register);
         checkGender = "";
-        male = (RadioButton) findViewById(R.id.radio_male);
-        female = (RadioButton) findViewById(R.id.radio_female);
-        other = (RadioButton) findViewById(R.id.radio_others);
-        rollNumber = 1;
+        rba = (RadioButton) findViewById(R.id.radio_a);
+        rbb = (RadioButton) findViewById(R.id.radio_b);
+        rbc = (RadioButton) findViewById(R.id.radio_c);
+        rbd = (RadioButton) findViewById(R.id.radio_d);
         infoStudent = getIntent().getParcelableExtra("object");
-        pos = getIntent().getIntExtra("pos", 0);
         datacheck = "view";
+
     }
 
 
@@ -146,12 +146,14 @@ public class StudentDataEntry extends BaseActivity {
      * gender Select
      */
     public void genderSelect() {
-        if (onRadioButtonClicked(male)) {
-            checkGender = male.getText().toString();
-        } else if (onRadioButtonClicked(female)) {
-            checkGender = female.getText().toString();
-        } else if (onRadioButtonClicked(other)) {
-            checkGender = other.getText().toString();
+        if (onRadioButtonClicked(rba)) {
+            checkGender = rba.getText().toString();
+        } else if (onRadioButtonClicked(rbb)) {
+            checkGender = rbb.getText().toString();
+        } else if (onRadioButtonClicked(rbc)) {
+            checkGender = rbc.getText().toString();
+        } else if (onRadioButtonClicked(rbd)) {
+            checkGender = rbd.getText().toString();
         }
     }
 
@@ -176,11 +178,11 @@ public class StudentDataEntry extends BaseActivity {
      * set the data in different different fields
      */
     private void setData() {
-        fullName.setText(infoStudent.getFullName());
-        schoolName.setText(infoStudent.getSchoolName());
-        emailId.setText(infoStudent.getEmailId());
-        contactNumber.setText(infoStudent.getContactNumber());
-        register.setText("Save");
-        register.setVisibility(View.GONE);
+        etFullName.setText(infoStudent.getFullName());
+        etSchoolName.setText(infoStudent.getSchoolName());
+        etEmailId.setText(infoStudent.getEmailId());
+        etContactNumber.setText(infoStudent.getContactNumber());
+        btnRegister.setText("Save");
+        btnRegister.setVisibility(View.GONE);
     }
 }

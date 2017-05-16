@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.example.sumit_thakur.studentmanagementsystem.Model.StudentInformation;
 import com.example.sumit_thakur.studentmanagementsystem.R;
 import com.example.sumit_thakur.studentmanagementsystem.StudentDataEntry;
+
 import java.util.ArrayList;
+
 /**
  *
  */
@@ -84,8 +87,9 @@ public class RecyclerViewAdapter extends android.support.v7.widget.RecyclerView.
             this.tvContact = (TextView) itemView.findViewById(R.id.mobileNumber);
             this.tvGender = (TextView) itemView.findViewById(R.id.gender);
             this.tvRollNo = (TextView) itemView.findViewById(R.id.tv_roll_no);
-            tvFname.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
+
         /**
          * @param v view
          */

@@ -25,13 +25,14 @@ import java.util.Comparator;
  * Details of Student
  */
 public class DetaisStudent extends BaseActivity {
-    private static final int REQUEST_CODE = 2, RESULT_CODE = 22;
-    private Button addStudent;
+    private static final int REQUEST_CODE = 2;
+    private static Integer rollNumber = 0;
+    private Button btnAddStudent;
     private StudentInformation studentInfo;
     private ArrayList<StudentInformation> userInfos;
-    private RecyclerView recyclerView;
-    private Switch changeView;
-    private Spinner spinner;
+    private RecyclerView rvRecyclerView;
+    private Switch swChangeView;
+    private Spinner spSpinner;
 
     /**
      * @param savedInstanceState onCreate Activity start
@@ -42,10 +43,11 @@ public class DetaisStudent extends BaseActivity {
         setContentView(R.layout.activity_detais_student);
         init();
         spinnerFunctionality();
-        addStudent.setOnClickListener(new View.OnClickListener() {
+        btnAddStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 Intent intent = new Intent(DetaisStudent.this, StudentDataEntry.class);
+                intent.putExtra("rollNumber", rollNumber);
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
@@ -55,24 +57,25 @@ public class DetaisStudent extends BaseActivity {
      * initialization
      */
     public void init() {
-        addStudent = (Button) findViewById(R.id.btn_createPress);
+        btnAddStudent = (Button) findViewById(R.id.btn_createPress);
         studentInfo = new StudentInformation();
         userInfos = new ArrayList<>();
-        changeView = (Switch) findViewById(R.id.sw_change);
-        spinner = (Spinner) findViewById(R.id.sp_user_sort);
+        swChangeView = (Switch) findViewById(R.id.sw_change);
+        spSpinner = (Spinner) findViewById(R.id.sp_user_sort);
+        rollNumber++;
     }
 
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
-        if (resultCode == RESULT_CODE) {
+        if (resultCode == RESULT_OK) {
             studentInfo = intent.getParcelableExtra("StudentInformation");
             userInfos.add(studentInfo);
             RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(this, userInfos);
-            recyclerView = (RecyclerView) findViewById(R.id.rvUserInfo);
-            recyclerView.setAdapter(recyclerViewAdapter);
+            rvRecyclerView = (RecyclerView) findViewById(R.id.rvUserInfo);
+            rvRecyclerView.setAdapter(recyclerViewAdapter);
             layoutSelection();
-            recyclerView.setHasFixedSize(true);
+            rvRecyclerView.setHasFixedSize(true);
         } else {
             Toast.makeText(getBaseContext(), "Sucessfully changed", Toast.LENGTH_LONG).show();
         }
@@ -82,14 +85,14 @@ public class DetaisStudent extends BaseActivity {
      * layout selection grid or linear
      */
     private void layoutSelection() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        changeView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        rvRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        swChangeView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
                 if (isChecked) {
-                    recyclerView.setLayoutManager(new GridLayoutManager(DetaisStudent.this, 2));
+                    rvRecyclerView.setLayoutManager(new GridLayoutManager(DetaisStudent.this, 2));
                 } else {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(DetaisStudent.this));
+                    rvRecyclerView.setLayoutManager(new LinearLayoutManager(DetaisStudent.this));
                 }
             }
 
@@ -105,9 +108,8 @@ public class DetaisStudent extends BaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.options_to_sort_student, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spSpinner.setAdapter(adapter);
+        spSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
                 String dataSortVariable = parent.getItemAtPosition(position).toString();

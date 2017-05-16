@@ -1,8 +1,5 @@
 package com.example.sumit_thakur.studentmanagementsystem.Model;
 
-/**
- * Created by SUMIT_THAKUR on 04/04/17.
- */
 
 import android.os.Parcel;
 import android.os.Parcelable;
